@@ -66,9 +66,9 @@ class MyApp(server.App):
                     'control_id': 'submit',
                     'tab': 'Table2'},
                     {   'type': 'plot',
-                    'id': 'plot1',
+                    'id': 'plot2',
                     'control_id': 'submit',
-                    'tab': 'Plot1'}
+                    'tab': 'Plot2'}
                     ]
 
     controls = [{   "type": 'button',
@@ -115,8 +115,11 @@ class MyApp(server.App):
         f = f1[['VCI', 'TCI', 'VHI']]
         return f.set_index(f1['week']).plot()
 
-    #def plot2(self, params):
 
+    def plot2(self, params):
+        f1 = self.table1(params)
+        f = f1[['VHI']]
+        return f.set_index(f1['week']).plot()
 
 app = MyApp()
 app.launch(port = 9090)
