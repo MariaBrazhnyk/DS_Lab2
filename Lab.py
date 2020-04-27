@@ -12,31 +12,31 @@ class MyApp(server.App):
                 {
                     "type":'dropdown',
                     "label": 'Choose province',
-                    "options" : [ {"label": "1", "value":"1"},
-                                  {"label": "2", "value":"2"},
-                                  {"label": "3", "value":"3"},
-                                  {"label": "4", "value":"4"},
-                                  {"label": "5", "value":"5"},
-                                  {"label": "6", "value":"6"},
-                                  {"label": "7", "value":"7"},
-                                  {"label": "8", "value":"8"},
-                                  {"label": "9", "value":"9"},
-                                  {"label": "10", "value":"10"},
-                                  {"label": "11", "value":"11"},
-                                  {"label": "12", "value":"12"},
-                                  {"label": "13", "value":"13"},
-                                  {"label": "14", "value":"14"},
-                                  {"label": "15", "value":"15"},
-                                  {"label": "16", "value":"16"},
-                                  {"label": "17", "value":"17"},
-                                  {"label": "18", "value":"18"},
-                                  {"label": "19", "value":"19"},
-                                  {"label": "20", "value":"19"},
-                                  {"label": "21", "value":"20"},
-                                  {"label": "22", "value":"21"},
-                                  {"label": "23", "value":"22"},
-                                  {"label": "24", "value":"23"},
-                                  {"label": "25", "value":"24"}],
+                    "options" : [ {"label": "Вінницька", "value":"1"},
+                                  {"label": "Волинська", "value":"2"},
+                                  {"label": "Дніпропетровська", "value":"3"},
+                                  {"label": "Донецька", "value":"4"},
+                                  {"label": "Житомирська", "value":"5"},
+                                  {"label": "Закарпатська", "value":"6"},
+                                  {"label": "Запорізька", "value":"7"},
+                                  {"label": "Івано-Франківська", "value":"8"},
+                                  {"label": "Київська", "value":"9"},
+                                  {"label": "Кіровоградська", "value":"10"},
+                                  {"label": "Луганська", "value":"11"},
+                                  {"label": "Львівська", "value":"12"},
+                                  {"label": "Миколаївська", "value":"13"},
+                                  {"label": "Одеська", "value":"14"},
+                                  {"label": "Полтавська", "value":"15"},
+                                  {"label": "Рівенська", "value":"16"},
+                                  {"label": "Сумська", "value":"17"},
+                                  {"label": "Тернопільська", "value":"18"},
+                                  {"label": "Харківська", "value":"19"},
+                                  {"label": "Херсонська", "value":"19"},
+                                  {"label": "Хмельницька", "value":"20"},
+                                  {"label": "Черкаська", "value":"21"},
+                                  {"label": "Чернівецька", "value":"22"},
+                                  {"label": "Чернігівська", "value":"23"},
+                                  {"label": "Крим", "value":"24"}],
                     "key": 'province'
                 },
                 {
@@ -105,7 +105,7 @@ class MyApp(server.App):
             Year.append(year)
             Month.append(month)
             Week.append(week)
-            y2019 = df[(df['week'] == week) & (df['year'] == year)]['VHI']
+            y2019 = float(df[(df['week'] == week) & (df['year'] == year)]['VHI'])
             VHI.append(y2019)
         df3 = pd.DataFrame({'Year': Year, 'Month': Month, 'Week': Week, 'VHI': VHI})
         return df3
@@ -117,9 +117,9 @@ class MyApp(server.App):
 
 
     def plot2(self, params):
-        f1 = self.table1(params)
+        f1 = self.table2(params)
         f = f1[['VHI']]
-        return f.set_index(f1['week']).plot()
+        return f.set_index(f1['Week']).plot()
 
 app = MyApp()
 app.launch(port = 9090)
